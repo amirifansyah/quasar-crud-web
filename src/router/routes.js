@@ -11,7 +11,8 @@ const routes = [
     path: '/',
     component: () => import('layouts/LoginRegisLayout.vue'),
     children: [
-      { path: 'auth/login', component: () => import('pages/users/Login.vue') }
+      { path: 'auth/login', component: () => import('pages/users/Login.vue') },
+      { path: 'auth/registrasi', component: () => import('pages/users/Registrasi.vue') }
     ]
   },
 

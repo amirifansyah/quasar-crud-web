@@ -1,21 +1,14 @@
 <template>
- <q-layout class="bg-blue-grey-1" view="hHh Lpr LFf">
+   <q-layout class="bg-blue-grey-1" view="hHh Lpr LFf">
    <q-page-container>
      <q-page padding class="row items-center justify-center">
        <div class="row full-width">
          <div class="col-md-8 offset-md-2 col-xs-12 q-pl-md q-pr-md q-pt-sm">
            <q-card flat class="bg-white text-black">
              <div class="row">
-               <div class="col-md-6 col-xs-12">
-                 <div class="row q-pt-md q-pb-md bg-white">
-                   <div class="col-md-8 offset-2 col-xs-6">
-                      <q-img spinner-color="white" placeholder-src="../../../public/icons/user.png" src="../../../public/icons/Login.png"></q-img>
-                   </div>
-                 </div>
-               </div>
-                 <div class="col-md-6 col-xs-12 q-pt-md justify-center text-center">
+                 <div class="col-md-12 col-xs-12 q-pt-md justify-center text-center">
+                    <h3>Register Dulu jon</h3>
                    <div class="pa-md" style="padding: 0px 30px">
-                     <div class="text-blue-grey-14 text-h4">Login</div>
                     <q-form
                       @submit="onSubmit"
                       @reset="onReset"
@@ -32,6 +25,26 @@
 
                       <q-input
                         filled
+                        type="text"
+                        v-model="email"
+                        label="Email"
+                        hint="email"
+                        lazy-rules
+                       :rules="[ val => val && val.length > 0 || 'email Tidak Boleh Kosong']"
+                      />
+
+                      <q-input
+                        filled
+                        type="text"
+                        v-model="notelp"
+                        label="No Telp"
+                        hint="No Telp"
+                        lazy-rules
+                       :rules="[ val => val && val.length > 0 || 'email Tidak Boleh Kosong']"
+                      />
+
+                      <q-input
+                        filled
                         type="password"
                         v-model="password"
                         label="Password"
@@ -40,9 +53,10 @@
                        :rules="[ val => val && val.length > 0 || 'Password Tidak Boleh Kosong']"
                       />
 
-                      <div>
-                        <q-btn label="Login" type="submit" color="primary"/>
-                        <q-btn label="Registrasi" color="primary" flat to="/auth/registrasi" class="q-ml-sm" />
+
+                      <div class="q-mb-lg">
+                        <p>Back To <q-btn label="Login" color="primary" flat to="/auth/login" class="q-ml-sm" /> </p>
+                        <q-btn label="Submit" type="submit" color="primary"/>
                       </div>
                     </q-form>
 
@@ -62,8 +76,8 @@ import { useQuasar } from 'quasar'
 import { ref } from 'vue'
 
 export default {
-  name: 'login-user',
-  setup () {
+  name: 'Register-user',
+   setup () {
     const $q = useQuasar()
 
     const name = ref(null)
@@ -71,8 +85,11 @@ export default {
     const accept = ref(false)
 
     return {
-        username: '',
+      username: '',
+      email: '',
+      notelp: '',
       password: '',
+      accept: false,
 
       onSubmit () {
         if (accept.value !== true) {
@@ -103,6 +120,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>
