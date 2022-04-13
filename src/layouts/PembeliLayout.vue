@@ -109,7 +109,7 @@
 <script>
 
 export default {
-  name: 'MainLayout',
+  name: 'PembeliLayout',
 
   data () {
     return {

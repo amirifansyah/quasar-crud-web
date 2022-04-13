@@ -10,7 +10,8 @@
     >
 
       <template v-slot:top>
-        <q-btn color="teal" :disable="loading" label="Tambah Data Buku" to="/admin/inputdatabuku"/>
+        <span class="text-blue-grey-14">Data Transaksi</span>
+        <!-- <q-btn color="teal" :disable="loading" label="Tambah Data Buku" to="/inputdatabuku"/> -->
         <!-- <q-btn class="q-ml-sm" color="primary" :disable="loading" label="Remove row" @click="removeRow" /> -->
         <q-space />
         <q-input borderless dense debounce="300" color="primary" v-model="filter">
@@ -31,32 +32,35 @@ const columns = [
   {
     name: 'name',
     required: true,
-    label: 'Kode Buku',
+    label: 'Kode Transaksi',
     align: 'left',
     field: row => row.name,
     format: val => `${val}`,
     sortable: true
   },
-  { name: 'namaBuku', align: 'center', label: 'Nama Buku', field: 'namaBuku', sortable: true },
-  { name: 'penerbit', align: 'center', label: 'Penerbit', field: 'penerbit', sortable: true },
-  { name: 'pengarang', align: 'center', label: 'Pengarang', field: 'pengarang' },
-  { name: 'tahunTerbit', align: 'center', label: 'Tahun Terbit', field: 'tahunTerbit' },
+  { name: 'namaPembeli', align: 'center', label: 'Nama Pembeli', field: 'namaPembeli', sortable: true },
+  { name: 'judulBuku', align: 'center', label: 'Judul Buku', field: 'judulBuku', sortable: true },
+  { name: 'hargaBuku', align: 'center', label: 'Harga Buku', field: 'hargaBuku' },
+  { name: 'jumlahBeli', align: 'center', label: 'Jumlah Beli', field: 'jumlahBeli' },
+  { name: 'total', align: 'center', label: 'Total', field: 'total' },
 ]
 
 const originalRows = [
   {
-    name: 'K0001',
-    namaBuku: 'Para Pencari Tuhan',
-    penerbit: 'fakultas sementaun',
-    pengarang: 'jono ',
-    tahunTerbit: 2020,
+    name: 'Transn-001',
+    namaPembeli: 'Jono',
+    judulBuku: 'Meningkatkan Kesuburan',
+    hargaBuku: '500000',
+    jumlahBeli: 2,
+    total: 1000000,
   },
   {
-    name: 'K0002',
-    namaBuku: 'Para Pencari Kebaikan',
-    penerbit: 'fakultas sementaun',
-    pengarang: 'Sitompul',
-    tahunTerbit: 2021,
+    name: 'Transn-002',
+    namaPembeli: 'Surti',
+    judulBuku: 'Cara Berbakti Kepada Orang Tua',
+    hargaBuku: '605000',
+    jumlahBeli: 4,
+    total: 1200000,
   }
 ]
 export default {
