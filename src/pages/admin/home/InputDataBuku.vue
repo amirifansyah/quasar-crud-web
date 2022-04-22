@@ -13,7 +13,7 @@
             label="Kode Buku"
             lazy-rules
             color="teal"
-            v-model="kodejudulbuku"
+            v-model="kodeBuku"
             :rules="[
             val => val !== null && val !== '' || 'Kode Buku Dibutuhkan'
             ]">
@@ -92,11 +92,11 @@
 export default {
   data () {
     return {
+      kodeBuku: null,
       judulbuku: null,
       penerbit: null,
       pengarang: null,
       tahunterbit: null,
-      kodeJudulBuku: null,
     }
   }
 }

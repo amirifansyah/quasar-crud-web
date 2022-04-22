@@ -1,6 +1,7 @@
 import { route } from 'quasar/wrappers'
 import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory } from 'vue-router'
 import routes from './routes'
+import { LocalStorage, Notify } from 'quasar'
 
 /*
  * If not building with SSR mode, you can
@@ -24,6 +25,26 @@ export default route(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE)
+  })
+
+  Router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.auth)) {
+      if (LocalStorage.getItem('datauser') === null || LocalStorage.getItem('datauser') === undefined) {
+        next({
+          path: '/auth/login',
+        })
+        Notify.create({
+          icon: 'ion-close',
+          color: 'negative',
+          message: 'anda belum login',
+          actions: [{ icon: 'close', color: 'white' }]
+        })
+      } else {
+        next()
+      }
+    }else {
+      next()
+    }
   })
 
   return Router

@@ -3,6 +3,9 @@ const routes = [
   {
     path: '/admin',
     component: () => import('layouts/MainLayout.vue'),
+    meta: {
+      auth: true
+    },
     children: [
       { path: '', component: () => import('pages/IndexPage.vue') },
       { path: 'inputdatabuku', component: () => import('pages/admin/home/InputDataBuku.vue') },
@@ -11,6 +14,9 @@ const routes = [
   },
   {
     path: '/pembeli',
+    meta: {
+      auth: true
+    },
     component: () => import('layouts/PembeliLayout.vue'),
     children: [
       { path: '', component: () => import('src/pages/Pembeli/DataBuku/DataBuku.vue') },
