@@ -119,6 +119,7 @@ export default {
         namaLengkap: null,
         email: null,
         noTelp: null,
+        role: "2",
         password: null,
       },
       accept: false,

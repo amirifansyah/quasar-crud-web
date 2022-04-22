@@ -16,14 +16,12 @@
                  <div class="col-md-6 col-xs-12 q-pt-md justify-center text-center">
                    <div class="pa-md" style="padding: 0px 30px">
                      <div class="text-blue-grey-14 text-h4">Login</div>
-                    <q-form
-                      @submit="onSubmit"
-                      @reset="onReset"
+                    <q-form @submit="onSubmit"
                       class="q-gutter-md"
                     >
                       <q-input
                         filled
-                        v-model="username"
+                        v-model="form.userName"
                         label="User Name"
                         hint="username"
                         lazy-rules
@@ -33,7 +31,7 @@
                       <q-input
                         filled
                         type="password"
-                        v-model="password"
+                        v-model="form.password"
                         label="Password"
                         hint="password"
                         lazy-rules
@@ -58,51 +56,46 @@
 </template>
 
 <script>
-import { useQuasar } from 'quasar'
+import { useQuasar, Notify } from 'quasar'
 import { ref } from 'vue'
+import { api } from "../../boot/axios";
 
 export default {
   name: 'login-user',
-  setup () {
-    const $q = useQuasar()
-
-    const name = ref(null)
-    const age = ref(null)
-    const accept = ref(false)
-
+  data() {
     return {
-        username: '',
-      password: '',
-
-      onSubmit () {
-        if (accept.value !== true) {
-          $q.notify({
-            color: 'red-5',
-            textColor: 'white',
-            icon: 'warning',
-            message: 'You need to accept the license and terms first'
-          })
-        }
-        else {
-          $q.notify({
-            color: 'green-4',
-            textColor: 'white',
-            icon: 'cloud_done',
-            message: 'Submitted'
-          })
-        }
+      form: {
+        userName: '',
+        password: ''
       },
-
-      onReset () {
-        name.value = null
-        age.value = null
-        accept.value = false
-      }
+      accept: false
+    }
+  },
+  methods: {
+    onSubmit() {
+      api.post('/api/user/login', this.form)
+        .then(res => {
+          if (res.error) {
+            localStorage.setItem('datauser', JSON.stringify(res.message.data))
+              if (res.message.data.role == 1) {
+                this.$router.push('/admin')
+              } else {
+                this.$router.push('/pembeli')
+              }
+          } else {
+            Notify.create({
+              type: 'negative',
+              message: res.message
+            })
+          }
+        })
+        .catch(err => {
+          Notify.create({
+            type: 'negative',
+            message: err.message
+          })
+        })
     }
   }
 }
 </script>
-
-<style scoped>
-
-</style>
