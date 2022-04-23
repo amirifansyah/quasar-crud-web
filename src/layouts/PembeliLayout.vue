@@ -34,6 +34,7 @@
                   color="teal"
                   label="Keluar"
                   unelevated
+                  @click="logout"
                   size="sm"
                   v-close-popup>
                   <q-tooltip>Keluar disini..</q-tooltip>
@@ -113,7 +114,14 @@ export default {
 
   data () {
     return {
-      left: false
+      left: false,
+      datauser: localStorage.getItem('datauser')
+    }
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem('datauser')
+      this.$router.push('auth/login')
     }
   }
 }
